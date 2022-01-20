@@ -22,8 +22,22 @@ List of Owners/Schemas/Databases to consider
 oracle_db_inclusion_list = []
 oracle_db_exclusion_list = []
 
-get_dbs_list_query = "select username from ALL_USERS where REGEXP_LIKE(username,'{}')"
-get_tables_list_query = "SELECT owner || '.' || table_name  from all_tables where owner = '{}'"
-get_column_list_query = "select column_name,data_type, data_precision, data_scale, nullable " \
-                            "from ALL_TAB_COLUMNS " \
-                            "where TABLE_NAME = '{}' and owner = '{}'"
+get_dbs_list_query = "SELECT USERNAME FROM ALL_USERS WHERE REGEXP_LIKE(USERNAME,'{}')"
+get_tables_list_query = "SELECT TABLE_NAME  FROM ALL_TABLES WHERE OWNER = '{}'"
+get_column_list_query = "SELECT COLUMN_NAME, DATA_TYPE, DATA_PRECISION, DATA_SCALE, NULLABLE " \
+                        "FROM ALL_TAB_COLUMNS " \
+                        "WHERE TABLE_NAME = '{}' AND OWNER = '{}'"
+get_pk_constraint_list_query = "SELECT ACC.CONSTRAINT_NAME, ACC.COLUMN_NAME " \
+                               "FROM ALL_CONSTRAINTS AC JOIN ALL_CONS_COLUMNS ACC " \
+                               "ON ACC.OWNER = AC.OWNER " \
+                               "AND ACC.CONSTRAINT_NAME = AC.CONSTRAINT_NAME " \
+                               "WHERE AC.TABLE_NAME = '{}' AND AC.OWNER = '{}' " \
+                               "AND AC.CONSTRAINT_TYPE = 'P'"
+get_fk_constraint_list_query = "SELECT ACC.CONSTRAINT_NAME,ACC.COLUMN_NAME, AC_FK.TABLE_NAME,AC_FK.CONSTRAINT_NAME   " \
+                               "FROM ALL_CONS_COLUMNS ACC JOIN ALL_CONSTRAINTS AC " \
+                               "ON AC.OWNER= ACC.OWNER " \
+                               "AND AC.CONSTRAINT_NAME = ACC.CONSTRAINT_NAME " \
+                               "JOIN ALL_CONSTRAINTS AC_FK " \
+                               "ON AC_FK.OWNER = AC.OWNER " \
+                               "AND AC_FK.CONSTRAINT_NAME = AC.CONSTRAINT_NAME " \
+                               "WHERE AC.TABLE_NAME = '{}' AND AC.OWNER = '{}' AND AC.CONSTRAINT_TYPE = 'R'"

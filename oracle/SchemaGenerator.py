@@ -1,3 +1,4 @@
+import json
 import logging
 import conf.oracle_config as ora_config
 from oracle.Connection import Connection
@@ -20,14 +21,14 @@ class SchemaGenerator:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def generate_schema(self):
+    def extract_schema(self):
         """
 
         :return:
         """
         conn_obj = Connection()
         conn = conn_obj.get_connection()
-        master_details = dict()
+
         db_list = self.get_databases_list(conn)
         self.logger.info("Below are the list of schemas found ::\n{}".format('\n'.join(db_list)))
         for db in db_list:
@@ -36,10 +37,17 @@ class SchemaGenerator:
                                                                                             '\n'.join(table_list)))
 
             for table in table_list:
+                self.logger.info("Fetching DDLs for {}.{}".format(db,table))
+                master_details = dict()
                 master_details['db'] = db
                 master_details['table'] = table
-                master_details['columns'] = self.get_column_details(conn, table)
-                master_details['constraints'] = self.get_constraint_details(conn, table)
+                master_details['columns'] = self.get_column_details(conn, db, table)
+                master_details['constraints'] = self.get_constraint_details(conn, db, table)
+
+                with open('metadata/oracle/{}_{}.json'.format(db,table), 'w') as ddl_fp:
+                    ddl_fp.write(json.dumps(master_details,indent=3))
+
+
 
     def get_databases_list(self, conn):
         """
@@ -66,6 +74,8 @@ class SchemaGenerator:
                 self.logger.info("No Databases found in oracle_db_exclusion_list")
 
         final_input_list = ['SH', 'ADMIN', 'ME']
+        self.logger.debug(ora_config.get_dbs_list_query.format(
+            '^{}$'.format('$|^'.join(final_input_list))))
         result = run_oracle_query(conn, ora_config.get_dbs_list_query.format(
             '^{}$'.format('$|^'.join(final_input_list))))
         final_list = list()
@@ -80,14 +90,53 @@ class SchemaGenerator:
         :param db:
         :return:
         """
+        self.logger.debug(ora_config.get_tables_list_query.format(db))
         result = run_oracle_query(conn, ora_config.get_tables_list_query.format(db))
         final_list = list()
         for row in result:
             final_list.append(row[0])
         return final_list
 
-    def get_column_details(self, conn, table):
-        pass
+    def get_column_details(self, conn, db, table):
+        """
 
-    def get_constraint_details(self, conn, table):
-        pass
+        :param conn:
+        :param db:
+        :param table:
+        :return:
+        """
+        self.logger.debug(ora_config.get_column_list_query.format(table, db))
+        result = run_oracle_query(conn, ora_config.get_column_list_query.format(table, db))
+        final_list = list()
+        for row in result:
+            column_data = {
+                'COLUMN_NAME': row[0],
+                'DATA_TYPE': row[1],
+                'DATA_PRECISION': row[2],
+                'DATA_SCALE': row[3],
+                'NULLABLE': row[4]
+            }
+            final_list.append(column_data)
+        return final_list
+
+    def get_constraint_details(self, conn, db, table):
+        self.logger.debug(ora_config.get_pk_constraint_list_query.format(table, db))
+        result = run_oracle_query(conn, ora_config.get_pk_constraint_list_query.format(table, db))
+        final_list = list()
+        for row in result:
+            column_data = {
+                'CONSTRAINT_NAME': row[0],
+                'COLUMN_NAME': row[1]
+            }
+            final_list.append(column_data)
+        result = run_oracle_query(conn, ora_config.get_fk_constraint_list_query.format(table, db))
+        final_list = list()
+        for row in result:
+            column_data = {
+                'CONSTRAINT_NAME': row[0],
+                'COLUMN_NAME': row[1],
+                'FK_TABLE_NAME': row[2],
+                'FK_CONSTRAINT_NAME': row[3],
+            }
+            final_list.append(column_data)
+        return final_list
