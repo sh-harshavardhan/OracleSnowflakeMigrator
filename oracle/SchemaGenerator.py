@@ -37,17 +37,18 @@ class SchemaGenerator:
                                                                                             '\n'.join(table_list)))
 
             for table in table_list:
-                self.logger.info("Fetching DDLs for {}.{}".format(db,table))
+                self.logger.info("Fetching DDLs for {}.{}".format(db, table))
                 master_details = dict()
                 master_details['db'] = db
                 master_details['table'] = table
                 master_details['columns'] = self.get_column_details(conn, db, table)
                 master_details['constraints'] = self.get_constraint_details(conn, db, table)
 
-                with open('metadata/oracle/{}_{}.json'.format(db,table), 'w') as ddl_fp:
-                    ddl_fp.write(json.dumps(master_details,indent=3))
+                with open('metadata/oracle/raw/{}.{}.json'.format(db, table), 'w') as ddl_fp:
+                    ddl_fp.write(json.dumps(master_details, indent=3))
 
-
+    def generate_ddls(self):
+        pass
 
     def get_databases_list(self, conn):
         """

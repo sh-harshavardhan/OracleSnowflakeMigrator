@@ -1,11 +1,10 @@
 oracle_connection_details = {
-    "server": "tcps://adb.ap-hyderabad-1.oraclecloud.com?wallet_location=c:\\Users\\ekhar\\Downloads\\Wallet_sandboxdb",
     "username": "ADMIN",
     "password": "Hindupur!123",
-    "service": "g674a77d814dfc7_sandboxdb_high.adb.oraclecloud.com",
-    "port": 1522,
     "dsn": "sandboxdb_high"
 }
+
+oracle_client_dir = r"C:\oraClient\instantclient_19_9"
 
 """
 List of Owners/Schemas/Databases to consider
