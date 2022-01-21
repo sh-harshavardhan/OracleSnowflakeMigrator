@@ -1,7 +1,7 @@
 import json
 import logging
 import conf.oracle_config as ora_config
-from oracle.Connection import Connection
+from oracle_trans.Connection import Connection
 
 
 def run_oracle_query(conn, query):
@@ -47,8 +47,6 @@ class SchemaGenerator:
                 with open('metadata/oracle/raw/{}.{}.json'.format(db, table), 'w') as ddl_fp:
                     ddl_fp.write(json.dumps(master_details, indent=3))
 
-    def generate_ddls(self):
-        pass
 
     def get_databases_list(self, conn):
         """
@@ -115,7 +113,8 @@ class SchemaGenerator:
                 'DATA_TYPE': row[1],
                 'DATA_PRECISION': row[2],
                 'DATA_SCALE': row[3],
-                'NULLABLE': row[4]
+                'DATA_LENGTH' : row[4],
+                'NULLABLE': row[5]
             }
             final_list.append(column_data)
         return final_list

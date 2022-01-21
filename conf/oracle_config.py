@@ -23,7 +23,7 @@ oracle_db_exclusion_list = []
 
 get_dbs_list_query = "SELECT USERNAME FROM ALL_USERS WHERE REGEXP_LIKE(USERNAME,'{}')"
 get_tables_list_query = "SELECT TABLE_NAME  FROM ALL_TABLES WHERE OWNER = '{}'"
-get_column_list_query = "SELECT COLUMN_NAME, DATA_TYPE, DATA_PRECISION, DATA_SCALE, NULLABLE " \
+get_column_list_query = "SELECT COLUMN_NAME, DATA_TYPE, DATA_PRECISION, DATA_SCALE,DATA_LENGTH, NULLABLE " \
                         "FROM ALL_TAB_COLUMNS " \
                         "WHERE TABLE_NAME = '{}' AND OWNER = '{}'"
 get_pk_constraint_list_query = "SELECT ACC.CONSTRAINT_NAME, ACC.COLUMN_NAME " \
