@@ -1,4 +1,4 @@
-import conf.oracle_config as ora_config
+import conf.oracle_config as ora_conf
 import cx_Oracle
 import logging
 
@@ -10,8 +10,8 @@ class Connection:
 
     def get_connection(self):
         self.logger.info("Getting the connection object for Oracle")
-        cx_Oracle.init_oracle_client(lib_dir=ora_config.oracle_client_dir)
-        conn_details = ora_config.oracle_connection_details
+        cx_Oracle.init_oracle_client(lib_dir=ora_conf.oracle_client_dir)
+        conn_details = ora_conf.oracle_connection_details
         if not bool(conn_details.get("dsn")):
             self.logger.error("dsn missing in oracle_connection_details")
             exit(1)

@@ -4,22 +4,32 @@ import conf.oracle_config as ora_config
 from oracle_trans.Connection import Connection
 
 
-def run_oracle_query(conn, query):
-    """
 
-    :param conn:
-    :return:
-    """
-    cursor = conn.cursor()
-    cursor.execute(query)
-    result = cursor.fetchall()
-    return result
+
+
 
 
 class SchemaGenerator:
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+
+    def run_oracle_query(self,conn, query):
+        """
+
+        :param query:
+        :param conn:
+        :return:
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return result
+        except Exception as e:
+            self.logger.error("Failed to Execute the query on Oracle")
+            print(e)
+            exit(1)
 
     def extract_schema(self):
         """
