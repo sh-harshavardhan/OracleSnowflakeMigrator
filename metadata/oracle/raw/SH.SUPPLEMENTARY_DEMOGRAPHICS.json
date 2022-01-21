@@ -1,0 +1,119 @@
+{
+   "db": "SH",
+   "table": "SUPPLEMENTARY_DEMOGRAPHICS",
+   "columns": [
+      {
+         "COLUMN_NAME": "CUST_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "EDUCATION",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 21,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "OCCUPATION",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 21,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "HOUSEHOLD_SIZE",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 21,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "YRS_RESIDENCE",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "AFFINITY_CARD",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "BULK_PACK_DISKETTES",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "FLAT_PANEL_MONITOR",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "HOME_THEATER_PACKAGE",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "BOOKKEEPING_APPLICATION",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "PRINTER_SUPPLIES",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "Y_BOX_GAMES",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "OS_DOC_SET_KANJI",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "COMMENTS",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 4000,
+         "NULLABLE": "Y"
+      }
+   ],
+   "constraints": []
+}

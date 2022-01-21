@@ -1,0 +1,95 @@
+{
+   "db": "SH",
+   "table": "PROMOTIONS",
+   "columns": [
+      {
+         "COLUMN_NAME": "PROMO_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 6,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_NAME",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 30,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_SUBCATEGORY",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 30,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_SUBCATEGORY_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_CATEGORY",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 30,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_CATEGORY_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_COST",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_BEGIN_DATE",
+         "DATA_TYPE": "DATE",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 7,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_END_DATE",
+         "DATA_TYPE": "DATE",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 7,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_TOTAL",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 15,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_TOTAL_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      }
+   ],
+   "constraints": []
+}

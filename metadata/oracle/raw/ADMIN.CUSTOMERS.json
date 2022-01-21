@@ -1,0 +1,31 @@
+{
+   "db": "ADMIN",
+   "table": "CUSTOMERS",
+   "columns": [
+      {
+         "COLUMN_NAME": "CUSTOMER_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CUSTOMER_NAME",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 50,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CITY",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 50,
+         "NULLABLE": "Y"
+      }
+   ],
+   "constraints": []
+}
