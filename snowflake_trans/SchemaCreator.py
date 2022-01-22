@@ -7,128 +7,78 @@ from conf import snowflake_config as snow_conf
 from snowflake_trans.Connection import Connection
 
 
-
 class SchemaCreator:
+    conn_obj = Connection()
+    snow_conn = conn_obj.get_connection()
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def execute_snowflake_query(self, conn, query):
+    def generate_snowflake_schema(self):
+        self.create_snowflake_schemas()
+        self.execute_ddls()
+        self.add_constraints()
+
+    def create_snowflake_schemas(self):
+        ora_schema_files = glob.glob('metadata/oracle/raw/*.json')
+        self.logger.info("Converting the JSON files to .ddl s")
+        schema_list = set()
+        for json_file in ora_schema_files:
+            with open(json_file, 'r') as json_file_fp:
+                schema_list.add(json.loads(json_file_fp.read())["db"])
+        yet_to_create_schemas = schema_list - self.get_snowflake_schemas()
+        self.logger.info("Missing Schemas in snowflake, creating schemas :: \n{}"
+                         .format("\n".join(yet_to_create_schemas)))
+        for sch in yet_to_create_schemas:
+            self.conn_obj.execute_snowflake_query(self.snow_conn,
+                                                  snow_conf.create_schema_query.format(sch))
+
+    def get_snowflake_schemas(self):
+        results = self.conn_obj.query_snowflake_query(self.snow_conn, snow_conf.get_schemas_list_query, 1)
+        schema_list = set()
+        for row in results:
+            schema_list.add(row[1])
+        return schema_list
+
+    def execute_ddls(self):
         """
 
-        :param query:
-        :param conn:
         :return:
         """
-        try:
-            cursor = conn.cursor()
-            cursor.execute(query)
-        except Exception as e:
-            self.logger.error("Failed to Execute the query on Snowflake")
-            print(e)
-            exit(1)
+        ddl_files = glob.glob('metadata/snowflake/ddl/*.ddl')
+        for ddl_file in ddl_files:
+            self.logger.info("Executing DDL :: {}".format(ddl_file))
+            with open(ddl_file, 'r')as ddl_fp:
+                self.conn_obj.execute_snowflake_query(self.snow_conn, ddl_fp.read())
 
-    def prep_snowflake(self):
-        pass
-
-    def generate_ddls(self):
-        """
-
-        :return:
-        """
+    def add_constraints(self):
         ora_schema_files = glob.glob('metadata/oracle/raw/*.json')
         self.logger.info("Converting the JSON files to .ddl s")
         for json_file in ora_schema_files:
-            self.from_json_to_ddl(json_file)
+            with open(json_file, 'r') as json_file_fp:
+                json_schema = json.loads(json_file_fp.read())
 
-    def from_json_to_ddl(self, filename):
-        """
+                if bool(json_schema.get("constraints")):
+                    # 0. GENERATE THE DDL
+                    for constraint in json_schema.get("constraints"):
+                        for in_cons_key, in_cons_value in constraint.items():
+                            if in_cons_value.get("CONSTRAINT_TYPE") == 'PK':
+                                self.conn_obj.execute_snowflake_query(self.snow_conn, snow_conf.add_pk_query.format(
+                                    json_schema.get("db"),
+                                    json_schema.get("table"),
+                                    in_cons_key,
+                                    ",".join(in_cons_value.get("COLUMN_NAME"))))
 
-        :param filename:
-        :return:
-        """
-        self.logger.info("Converting :: {} ...".format(filename))
-        with open(filename, 'r') as json_fp:
-            try:
-                ddl_meta = json.loads(json_fp.read())
-            except Exception as e:
-                self.logger.error("Failed to parse the JSON file ::{}".format(filename))
-                print(e)
-                exit(1)
+                            elif in_cons_value.get("CONSTRAINT_TYPE") == 'FK':
+                                self.conn_obj.execute_snowflake_query(self.snow_conn, snow_conf.add_fk_query.format(
+                                    snow_conf.snowflake_db,
+                                    json_schema.get("db"),
+                                    json_schema.get("table"),
+                                    in_cons_key,
+                                    ",".join(in_cons_value.get("COLUMN_NAME")),
+                                    in_cons_value.get("FK_TABLE_NAME"),
+                                    ",".join(in_cons_value.get("FK_CONSTRAINT_NAME"))),
+                                                                      0)
 
-        # 0. GENERATE THE DDL
-        DDL_CMD = ""
-
-        # 1. CREATE STATEMENT
-        DDL_CMD += "CREATE OR REPLACE TABLE {}.{}.{} (".format(snow_conf.snowflake_db,
-                                                               ddl_meta.get('db'),
-                                                               ddl_meta.get("table"))
-
-        # 2. COLUMN ADDITION
-        for col in ddl_meta.get('columns'):
-            DDL_CMD += self.get_snowflake_column_def(col)
-
-        # 3. REMOVE LAST ',' AND END OF COLUMN ADDITION
-        DDL_CMD = DDL_CMD[:-1]
-        DDL_CMD += ')'
-
-        # 4. CONSTRAINT ADDITION
-        # for costraint in ddl_meta.get('constraints'):
-        #     DDL_CMD += self.get_snowflake_constraint_def(costraint)
-
-        output_ddl_location = Path(filename).stem + '.ddl'
-        with open('metadata/snowflake/ddl/' + output_ddl_location, 'w') as ddl_fp:
-            ddl_fp.write(DDL_CMD)
-
-    def get_snowflake_column_def(self, col_details):
-        """
-
-        :param col_details:
-        :return:
-        """
-
-        isNullable = "NOT NULL" if col_details.get("NULLABLE") == "Y" else ""
-        datatype = osdm.ora_snow_datatype_mapping.get(col_details.get("DATA_TYPE"))
-        if col_details.get("DATA_TYPE") in ("VARCHAR2", "NVARCHAR2", "CHAR", "NCHAR"):
-            precision_or_length = col_details.get("DATA_LENGTH")
-        else:
-            precision_or_length = col_details.get("DATA_PRECISION")
-
-        if bool(col_details.get("DATA_PRECISION")):
-            if bool(col_details.get("DATA_SCALE")):
-                # with precision and scale
-                return "\n{} {}({},{}) {},".format(col_details.get("COLUMN_NAME"),
-                                                   datatype,
-                                                   col_details.get("DATA_PRECISION"),
-                                                   col_details.get("DATA_SCALE"),
-                                                   isNullable)
-            elif bool(col_details.get("DATA_PRECISION")):
-                # with only precision/length
-                return "\n{} {}({}) {},".format(col_details.get("COLUMN_NAME"),
-                                                datatype,
-                                                precision_or_length,
-                                                isNullable)
-        else:
-            # without precision and scale
-            return "\n{} {} {},".format(col_details.get("COLUMN_NAME"), datatype, isNullable)
-
-    def get_snowflake_constraint_def(self, constraint):
-        """
-
-        :param constraint:
-        :return:
-        """
-        pass
-
-    def execute_ddls(self):
-        conn_obj = Connection()
-        conn = conn_obj.get_connection()
-#         query = """CREATE OR REPLACE TABLE "TEST"."ORA_SNOW".CUSTOMERS (
-# CUSTOMER_ID NUMBER(10) ,
-# CUSTOMER_NAME VARCHAR ,
-# CITY VARCHAR NOT NULL)
-#             """
-        ddl_files = glob.glob('metadata/snowflake/ddl/*.ddl')
-        for ddl_file in ddl_files:
-            with open(ddl_file,'r')as ddl_fp:
-                self.execute_snowflake_query(conn, ddl_fp.read())
+                else:
+                    pass

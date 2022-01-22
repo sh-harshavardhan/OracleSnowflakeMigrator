@@ -30,3 +30,42 @@ class Connection:
             self.logger.error("Failed to connect to snowflake")
             print(e)
             exit(1)
+
+    def execute_snowflake_query(self, conn, query, failure_exit_flag=True):
+        """
+
+        :param failure_exit_flag:
+        :param query:
+        :param conn:
+        :return:
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query)
+        except Exception as e:
+            print(e)
+            if failure_exit_flag:
+                self.logger.error("Failed to Execute the query on Snowflake :: \n{}".format(query))
+                exit(1)
+            else:
+                self.logger.warning("Failed to Execute the query on Snowflake :: \n{}".format(query))
+
+    def query_snowflake_query(self, conn, query, failure_exit_flag=True):
+        """
+
+        :param failure_exit_flag:
+        :param query:
+        :param conn:
+        :return:
+        """
+        try:
+            cursor = conn.cursor()
+            results = cursor.execute(query).fetchall()
+            return results
+        except Exception as e:
+            print(e)
+            if failure_exit_flag:
+                self.logger.error("Failed to Execute the query on Snowflake :: \n{}".format(query))
+                exit(1)
+            else:
+                self.logger.warning("Failed to Execute the query on Snowflake :: \n{}".format(query))

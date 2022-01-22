@@ -32,11 +32,14 @@ get_pk_constraint_list_query = "SELECT ACC.CONSTRAINT_NAME, ACC.COLUMN_NAME " \
                                "AND ACC.CONSTRAINT_NAME = AC.CONSTRAINT_NAME " \
                                "WHERE AC.TABLE_NAME = '{}' AND AC.OWNER = '{}' " \
                                "AND AC.CONSTRAINT_TYPE = 'P'"
-get_fk_constraint_list_query = "SELECT ACC.CONSTRAINT_NAME,ACC.COLUMN_NAME, AC_FK.TABLE_NAME,AC_FK.CONSTRAINT_NAME   " \
-                               "FROM ALL_CONS_COLUMNS ACC JOIN ALL_CONSTRAINTS AC " \
-                               "ON AC.OWNER= ACC.OWNER " \
-                               "AND AC.CONSTRAINT_NAME = ACC.CONSTRAINT_NAME " \
-                               "JOIN ALL_CONSTRAINTS AC_FK " \
-                               "ON AC_FK.OWNER = AC.OWNER " \
-                               "AND AC_FK.CONSTRAINT_NAME = AC.CONSTRAINT_NAME " \
-                               "WHERE AC.TABLE_NAME = '{}' AND AC.OWNER = '{}' AND AC.CONSTRAINT_TYPE = 'R'"
+get_fk_constraint_list_query = "SELECT a.constraint_name, a.column_name parent_column, " \
+                               "c_pk.table_name fk_table_name,  b.column_name fk_column_name   " \
+                               "FROM ALL_CONS_COLUMNS a  " \
+                               "JOIN ALL_CONSTRAINTS c " \
+                               "ON a.owner = c.owner AND a.constraint_name = c.constraint_name   " \
+                               "JOIN ALL_CONSTRAINTS c_pk " \
+                               "ON c.r_owner = c_pk.owner AND c.r_constraint_name = c_pk.constraint_name   " \
+                               "JOIN ALL_CONS_COLUMNS b " \
+                               "ON C_PK.owner = b.owner AND C_PK.CONSTRAINT_NAME = b.constraint_name " \
+                               "AND b.POSITION = a.POSITION      " \
+                               "WHERE c.constraint_type = 'R'  and a.TABLE_NAME = '{}' AND a.OWNER = '{}' "
