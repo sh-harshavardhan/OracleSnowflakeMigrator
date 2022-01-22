@@ -1,0 +1,65 @@
+{
+   "db": "SH",
+   "table": "CHANNELS",
+   "columns": [
+      {
+         "COLUMN_NAME": "CHANNEL_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CHANNEL_DESC",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 20,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CHANNEL_CLASS",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 20,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CHANNEL_CLASS_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CHANNEL_TOTAL",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 13,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CHANNEL_TOTAL_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      }
+   ],
+   "constraints": [
+      {
+         "CHANNELS_PK": {
+            "COLUMN_NAME": [
+               "CHANNEL_ID"
+            ],
+            "CONSTRAINT_TYPE": "PK",
+            "CONSTRAINT_NAME": "CHANNELS_PK"
+         }
+      }
+   ]
+}

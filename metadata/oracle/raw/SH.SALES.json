@@ -1,0 +1,121 @@
+{
+   "db": "SH",
+   "table": "SALES",
+   "columns": [
+      {
+         "COLUMN_NAME": "PROD_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CUST_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "TIME_ID",
+         "DATA_TYPE": "DATE",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 7,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CHANNEL_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "QUANTITY_SOLD",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "AMOUNT_SOLD",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      }
+   ],
+   "constraints": [
+      {
+         "SALES_PROMO_FK": {
+            "COLUMN_NAME": [
+               "PROMO_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "PROMO_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "SALES_PROMO_FK",
+            "FK_TABLE_NAME": "PROMOTIONS"
+         },
+         "SALES_PRODUCT_FK": {
+            "COLUMN_NAME": [
+               "PROD_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "PROD_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "SALES_PRODUCT_FK",
+            "FK_TABLE_NAME": "PRODUCTS"
+         },
+         "SALES_CUSTOMER_FK": {
+            "COLUMN_NAME": [
+               "CUST_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "CUST_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "SALES_CUSTOMER_FK",
+            "FK_TABLE_NAME": "CUSTOMERS"
+         },
+         "SALES_CHANNEL_FK": {
+            "COLUMN_NAME": [
+               "CHANNEL_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "CHANNEL_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "SALES_CHANNEL_FK",
+            "FK_TABLE_NAME": "CHANNELS"
+         },
+         "SALES_TIME_FK": {
+            "COLUMN_NAME": [
+               "TIME_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "TIME_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "SALES_TIME_FK",
+            "FK_TABLE_NAME": "TIMES"
+         }
+      }
+   ]
+}

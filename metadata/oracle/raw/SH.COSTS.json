@@ -1,0 +1,102 @@
+{
+   "db": "SH",
+   "table": "COSTS",
+   "columns": [
+      {
+         "COLUMN_NAME": "PROD_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "TIME_ID",
+         "DATA_TYPE": "DATE",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 7,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROMO_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "CHANNEL_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "UNIT_COST",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "UNIT_PRICE",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      }
+   ],
+   "constraints": [
+      {
+         "COSTS_PROMO_FK": {
+            "COLUMN_NAME": [
+               "PROMO_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "PROMO_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "COSTS_PROMO_FK",
+            "FK_TABLE_NAME": "PROMOTIONS"
+         },
+         "COSTS_CHANNEL_FK": {
+            "COLUMN_NAME": [
+               "CHANNEL_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "CHANNEL_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "COSTS_CHANNEL_FK",
+            "FK_TABLE_NAME": "CHANNELS"
+         },
+         "COSTS_PRODUCT_FK": {
+            "COLUMN_NAME": [
+               "PROD_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "PROD_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "COSTS_PRODUCT_FK",
+            "FK_TABLE_NAME": "PRODUCTS"
+         },
+         "COSTS_TIME_FK": {
+            "COLUMN_NAME": [
+               "TIME_ID"
+            ],
+            "FK_CONSTRAINT_NAME": [
+               "TIME_ID"
+            ],
+            "CONSTRAINT_TYPE": "FK",
+            "CONSTRAINT_NAME": "COSTS_TIME_FK",
+            "FK_TABLE_NAME": "TIMES"
+         }
+      }
+   ]
+}

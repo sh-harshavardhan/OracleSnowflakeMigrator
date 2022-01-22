@@ -1,0 +1,57 @@
+{
+   "db": "ADMIN",
+   "table": "EMP_TARGET",
+   "columns": [
+      {
+         "COLUMN_NAME": "EMP_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 10,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "FIRST_NAME",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 20,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "LAST_NAME",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 20,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "SALARY",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 8,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "DEPT_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 5,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      }
+   ],
+   "constraints": [
+      {
+         "SYS_C0028019": {
+            "COLUMN_NAME": [
+               "EMP_ID"
+            ],
+            "CONSTRAINT_TYPE": "PK",
+            "CONSTRAINT_NAME": "SYS_C0028019"
+         }
+      }
+   ]
+}

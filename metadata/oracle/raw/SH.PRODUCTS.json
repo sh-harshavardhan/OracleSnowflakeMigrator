@@ -1,0 +1,193 @@
+{
+   "db": "SH",
+   "table": "PRODUCTS",
+   "columns": [
+      {
+         "COLUMN_NAME": "PROD_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 6,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_NAME",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 50,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_DESC",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 4000,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_SUBCATEGORY",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 50,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_SUBCATEGORY_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_SUBCATEGORY_DESC",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 2000,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_CATEGORY",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 50,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_CATEGORY_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_CATEGORY_DESC",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 2000,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_WEIGHT_CLASS",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 3,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_UNIT_OF_MEASURE",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 20,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "PROD_PACK_SIZE",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 30,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "SUPPLIER_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 6,
+         "DATA_SCALE": 0,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_STATUS",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 20,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_LIST_PRICE",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 8,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_MIN_PRICE",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": 8,
+         "DATA_SCALE": 2,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_TOTAL",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 13,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_TOTAL_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "N"
+      },
+      {
+         "COLUMN_NAME": "PROD_SRC_ID",
+         "DATA_TYPE": "NUMBER",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 22,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "PROD_EFF_FROM",
+         "DATA_TYPE": "DATE",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 7,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "PROD_EFF_TO",
+         "DATA_TYPE": "DATE",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 7,
+         "NULLABLE": "Y"
+      },
+      {
+         "COLUMN_NAME": "PROD_VALID",
+         "DATA_TYPE": "VARCHAR2",
+         "DATA_PRECISION": null,
+         "DATA_SCALE": null,
+         "DATA_LENGTH": 1,
+         "NULLABLE": "Y"
+      }
+   ],
+   "constraints": [
+      {
+         "PRODUCTS_PK": {
+            "COLUMN_NAME": [
+               "PROD_ID"
+            ],
+            "CONSTRAINT_TYPE": "PK",
+            "CONSTRAINT_NAME": "PRODUCTS_PK"
+         }
+      }
+   ]
+}
