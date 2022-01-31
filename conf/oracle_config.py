@@ -1,6 +1,8 @@
+import base64
 oracle_connection_details = {
     "username": "ADMIN",
-    "password": "Hindupur!123",
+    "password": base64.b64decode(b'SGluZHVwdXIhMTIz').decode('utf-8'),
+    "account": "tx41467.ap-south-1.aws",
     "dsn": "sandboxdb_high"
 }
 

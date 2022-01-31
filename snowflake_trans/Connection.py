@@ -9,6 +9,10 @@ class Connection:
         self.logger = logging.getLogger(__name__)
 
     def get_connection(self):
+        """
+        :Description : To get connection to Snowflake
+        :return: snowflake connection object
+        """
         conn_details = snow_conf.snowflake_connection_details
         if not bool(conn_details.get("account")):
             self.logger.error("account missing in snowflake_connection_details")
@@ -33,11 +37,10 @@ class Connection:
 
     def execute_snowflake_query(self, conn, query, failure_exit_flag=True):
         """
-
-        :param failure_exit_flag:
-        :param query:
-        :param conn:
-        :return:
+        :Description : To execute the Query on snowflake without any results
+        :param failure_exit_flag: flag to indicate whether to exit incase of failure
+        :param query: Oracle query to be executed
+        :param conn: Connection object to snowflake
         """
         try:
             cursor = conn.cursor()
@@ -52,11 +55,10 @@ class Connection:
 
     def query_snowflake_query(self, conn, query, failure_exit_flag=True):
         """
-
-        :param failure_exit_flag:
-        :param query:
-        :param conn:
-        :return:
+        :Description : To execute the Query on Oracle and get some results
+        :param failure_exit_flag: flag to indicate wheather to exit incase of failure
+        :param query: Oracle query to be executed
+        :param conn: Connection object to Oracle
         """
         try:
             cursor = conn.cursor()

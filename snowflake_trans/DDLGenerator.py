@@ -17,8 +17,7 @@ class DDLGenerator:
 
     def generate_ddls(self):
         """
-
-        :return:
+        :Description : to convert json files to .ddl files compatable with snowflake
         """
         ora_schema_files = glob.glob('metadata/oracle/raw/*.json')
         self.logger.info("Converting the JSON files to .ddl s")
@@ -27,9 +26,8 @@ class DDLGenerator:
 
     def from_json_to_ddl(self, filename):
         """
-
-        :param filename:
-        :return:
+        :Description : convert each json file to ddl file compatable with snowflake
+        :param filename: file to be converted to ddl
         """
         self.logger.info("Converting :: {} ...".format(filename))
         with open(filename, 'r') as json_fp:
@@ -67,9 +65,9 @@ class DDLGenerator:
 
     def get_snowflake_column_def(self, col_details):
         """
-
-        :param col_details:
-        :return:
+        :Description : convert oracle datatype to snowflake datatype
+        :param col_details: oracle datatype
+        :return: snowflake compatable datatype
         """
 
         isNullable = "NOT NULL" if col_details.get("NULLABLE") == "Y" else ""
@@ -96,13 +94,5 @@ class DDLGenerator:
         else:
             # without precision and scale
             return "\n{} {} {},".format(col_details.get("COLUMN_NAME"), datatype, isNullable)
-
-    def get_snowflake_constraint_def(self, constraint):
-        """
-
-        :param constraint:
-        :return:
-        """
-        pass
 
 
