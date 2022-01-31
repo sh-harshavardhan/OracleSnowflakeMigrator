@@ -15,11 +15,17 @@ class SchemaCreator:
         self.logger = logging.getLogger(__name__)
 
     def generate_snowflake_schema(self):
+        """
+        :Description : Generate snowflake schema and run DDLs in snowflake
+        """
         self.create_snowflake_schemas()
         self.execute_ddls()
         self.add_constraints()
 
     def create_snowflake_schemas(self):
+        """
+        :Description : to create snowflake schemas if not exists
+        """
         ora_schema_files = glob.glob('metadata/oracle/raw/*.json')
         self.logger.info("Converting the JSON files to .ddl s")
         schema_list = set()
@@ -34,6 +40,10 @@ class SchemaCreator:
                                                   snow_conf.create_schema_query.format(sch))
 
     def get_snowflake_schemas(self):
+        """
+        :Description : get snowflake existing schemas, so that we know what are the new ones that has to be created
+        :return: list of schemas yet to be created in snowflake
+        """
         results = self.conn_obj.query_snowflake_query(self.snow_conn, snow_conf.get_schemas_list_query, 1)
         schema_list = set()
         for row in results:
@@ -42,8 +52,7 @@ class SchemaCreator:
 
     def execute_ddls(self):
         """
-
-        :return:
+        :Description : Execute all DDls in snowflake
         """
         ddl_files = glob.glob('metadata/snowflake/ddl/*.ddl')
         for ddl_file in ddl_files:
@@ -52,6 +61,9 @@ class SchemaCreator:
                 self.conn_obj.execute_snowflake_query(self.snow_conn, ddl_fp.read())
 
     def add_constraints(self):
+        """
+        :Description : add the constraints to snowflake tables once the tables are created.
+        """
         ora_schema_files = glob.glob('metadata/oracle/raw/*.json')
         self.logger.info("Converting the JSON files to .ddl s")
         for json_file in ora_schema_files:

@@ -1,7 +1,4 @@
-import glob
-import json
 import logging
-from conf import snowflake_config as snow_conf
 from snowflake_trans.Connection import Connection
 
 

@@ -9,6 +9,10 @@ class Connection:
         self.logger = logging.getLogger(__name__)
 
     def get_connection(self):
+        """
+        :Description : To get connection to Oracle
+        :return: oracle connection object
+        """
         self.logger.info("Getting the connection object for Oracle")
         cx_Oracle.init_oracle_client(lib_dir=ora_conf.oracle_client_dir)
         conn_details = ora_conf.oracle_connection_details
@@ -41,11 +45,11 @@ class Connection:
 
     def run_oracle_query(self,conn, query, failure_exit_flag=True):
         """
-
-        :param failure_exit_flag:
-        :param query:
-        :param conn:
-        :return:
+        :Description : To run the Query on Oracle
+        :param failure_exit_flag: flag to indicate wheather to exit incase of failure
+        :param query: Oracle query to be executed
+        :param conn: Connection object to Oracle
+        :return: results from oracle
         """
         try:
             cursor = conn.cursor()

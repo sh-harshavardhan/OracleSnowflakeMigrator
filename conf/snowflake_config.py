@@ -1,6 +1,7 @@
+import base64
 snowflake_connection_details = {
     "username": "researchpapers57",
-    "password": "Cisco@123",
+    "password": base64.b64decode(b'Q2lzY29AMTIz').decode('utf-8'),
     "account": "tx41467.ap-south-1.aws"
 }
 
